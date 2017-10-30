@@ -58,7 +58,6 @@ Important is that you see the following messages:
 The following libraries are not part of this collection yet:
 
 - [Remote logging](https://docs.fastly.com/api/logging)
-- [Utilities](https://docs.fastly.com/api/tools)
 - [Web Application Firewall](https://docs.fastly.com/api/waf)
 - [Dynamic Servers](https://docs.fastly.com/api/dynamicservers)
 
@@ -98,7 +97,8 @@ Some API endpoints require session authentication. These endpoints are not inclu
 | VCL              | 11                  | 11           | 100%     |
 | VCL Snippets     | 7                   | 7            | 100%     |
 | Version          | 9                   | 9            | 100%     |
-|                  | **161**             | **163**      | **99%**  |
+| Utilities        | 6                   | 6            | 100%     |
+|                  | **167**             | **169**      | **99%**  |
 
 ## Usage
 
