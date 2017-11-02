@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "Fastly",
-		"_postman_id": "2eaaff4f-374a-91b2-9e52-dad4832ee0a8",
+		"_postman_id": "4cc1fdb2-5d0a-7267-5a18-3ec20c257242",
 		"description": "The Fastly API is a RESTful API that supports all features available through the Fastly web interface. Use the libraries below to guide the development of your sites and applications.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -10293,251 +10293,258 @@
 			"description": "This section of the API documentation covers various utilities and extra functionality we provide in addition to the configuration services.",
 			"item": [
 				{
-					"name": "/content/edge_check",
-					"event": [
+					"name": "Content",
+					"description": "Fastly makes it possible to see which version of a particular URL is cached on each edge server.\n\n[Content Documentation](https://docs.fastly.com/api/tools#content)",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 200;"
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Fastly-Key",
-								"value": "{{token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{url}}/content/edge_check?url={{url}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"content",
-								"edge_check"
-							],
-							"query": [
+							"name": "/content/edge_check?url=url",
+							"event": [
 								{
-									"key": "url",
-									"value": "{{url}}",
-									"equals": true
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;"
+										]
+									}
 								}
-							]
-						},
-						"description": "**Description:**\n\nRetrieve headers and MD5 hash of the content for a particular URL from each Fastly edge server\n\n[Documentation](https://docs.fastly.com/api/tools#content_4d2d4548b29c7661e17ebe7098872d6d)"
-					},
-					"response": []
-				},
-				{
-					"name": "/datacenters",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 200;"
-								]
-							}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Fastly-Key",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/content/edge_check?url=https://www.example.com",
+									"protocol": "{{url}}/content/edge_check?url=https",
+									"host": [
+										"www",
+										"example",
+										"com"
+									],
+									"query": [
+										{
+											"key": "url",
+											"value": "https://www.example.com",
+											"equals": true
+										}
+									]
+								},
+								"description": "**Description:**\n\nRetrieve headers and MD5 hash of the content for a particular URL from each Fastly edge server.\n\n**Request Configuration:**\n\n- Update query string **url** parameter in URL\n\n[Documentation](https://docs.fastly.com/api/tools#content_4d2d4548b29c7661e17ebe7098872d6d)"
+							},
+							"response": []
 						}
 					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Fastly-Key",
-								"value": "{{token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{url}}/datacenters",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"datacenters"
-							]
-						},
-						"description": "**Description:**\n\nGet a list of all Fastly datacenters.\n\n[Documentation](https://docs.fastly.com/api/tools#datacenter_1c8d3b9dd035e301155b44eae05e0554)"
-					},
-					"response": []
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "/docs",
-					"event": [
+					"name": "Datacenter",
+					"description": "List Fastly datacenters and their locations.\n\n[Datacenter Documentation](https://docs.fastly.com/api/tools#datacenter)",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 200;"
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Fastly-Key",
-								"value": "{{token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{url}}/docs",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"docs"
-							]
-						},
-						"description": "**Description:**\n\nGets all documentation associated with the Fastly API.\n\n[Documentation](https://docs.fastly.com/api/tools#docs_79aecbf210c8163e20e2222a5c646453)"
-					},
-					"response": []
-				},
-				{
-					"name": "/docs/subject/endpoint",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 200;"
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Fastly-Key",
-								"value": "{{token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{url}}/docs/subject/{{endpoint}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"docs",
-								"subject",
-								"{{endpoint}}"
-							]
-						},
-						"description": "**Description:**\n\nGets all documentation relating to a given 'Subject'\n\n[Documentation](https://docs.fastly.com/api/tools#docs_6bffadbbcdac71d2731a90b9f60a661b)"
-					},
-					"response": []
-				},
-				{
-					"name": "/public-ip-list",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 200;"
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Fastly-Key",
-								"value": "{{token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{url}}/public-ip-list",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"public-ip-list"
-							]
-						},
-						"description": "**Description:**\n\nList public IP addresses for Fastly network\n\n[Documentation](https://docs.fastly.com/api/tools#public_ip_list_ef2e9900a1c9522b58f5abed92ec785e)"
-					},
-					"response": []
-				},
-				{
-					"name": "/docs/section/section",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 200;"
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Fastly-Key",
-								"value": "{{token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{url}}/docs/section/{{section}}?invert=0",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"docs",
-								"section",
-								"{{section}}"
-							],
-							"query": [
+							"name": "/datacenters",
+							"event": [
 								{
-									"key": "invert",
-									"value": "0",
-									"equals": true
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;"
+										]
+									}
 								}
-							]
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Fastly-Key",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/datacenters",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"datacenters"
+									]
+								},
+								"description": "**Description:**\n\nGet a list of all Fastly datacenters.\n\n[Documentation](https://docs.fastly.com/api/tools#datacenter_1c8d3b9dd035e301155b44eae05e0554)"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Docs",
+					"description": "Documentation of the endpoints that return the Fastly API Documentation.\n\n[Docs Documentation](https://docs.fastly.com/api/tools#docs)",
+					"item": [
+						{
+							"name": "/docs",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/docs",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"docs"
+									]
+								},
+								"description": "**Description:**\n\nGets all documentation associated with the Fastly API.\n\n[Documentation](https://docs.fastly.com/api/tools#docs_79aecbf210c8163e20e2222a5c646453)"
+							},
+							"response": []
 						},
-						"description": "**Description:**\n\nGets all documentation associated with a given Categorical Section where section is a regular_expression. passing invert=true will force a return of everything that does not match the given regular_expression\n\n[Documentation](https://docs.fastly.com/api/tools#docs_6bffadbbcdac71d2731a90b9f60a661b)"
-					},
-					"response": []
+						{
+							"name": "/docs/subject/:subject",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/docs/subject/acl",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"docs",
+										"subject",
+										"acl"
+									]
+								},
+								"description": "**Description:**\n\nGets all documentation relating to a given 'Subject'.\n\n**Request Configuration:**\n\n- Update **subject** param in URL\n\n[Documentation](https://docs.fastly.com/api/tools#docs_6bffadbbcdac71d2731a90b9f60a661b)"
+							},
+							"response": []
+						},
+						{
+							"name": "/docs/section/:section?invert=boolean",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/docs/section/acl?invert=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"docs",
+										"section",
+										"acl"
+									],
+									"query": [
+										{
+											"key": "invert",
+											"value": "1",
+											"equals": true
+										}
+									]
+								},
+								"description": "**Description:**\n\nGets all documentation associated with a given Categorical Section where section is a regular_expression. Passing invert=true will force a return of everything that does not match the given regular_expression.\n\n**Request Configuration:**\n\n- Update **section** param in URL\n- Update query string **invert** [0, 1] parameter in URL\n\n[Documentation](https://docs.fastly.com/api/tools#docs_bbc330986afe5e25df8cbe7597f5cea0)"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Public IP List",
+					"description": "To help you whitelist Fastly's services through your firewall, we provide access to the list of Fastly's assigned IP ranges.\n\n[Public IP List Documentation](https://docs.fastly.com/api/tools#public_ip_list)",
+					"item": [
+						{
+							"name": "/public-ip-list",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/public-ip-list",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"public-ip-list"
+									]
+								},
+								"description": "**Description:**\n\nList public IP addresses for Fastly network.\n\n[Documentation](https://docs.fastly.com/api/tools#public_ip_list_ef2e9900a1c9522b58f5abed92ec785e)"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
 				}
 			]
 		}
