@@ -1,37 +1,78 @@
-# Fastly API Collection for Postman
+# fastly-postman
 
-This repository contains a [Postman](https://www.getpostman.com/) collection and an environment for the [Fastly API](https://docs.fastly.com/api/). The goal is to make the interaction with the API as easy as possible without running and modifying cURL commands every time from scratch. You just need to update the global and environment variables to get started. Once setup is complete, you have another handy option to control your [Fastly](https://www.fastly.com/) account and services!
+> Fastly API client for Postman
 
 ![Banner](/screenshots/banner.png?raw=true "Fastly API Collection for Postman")
 
+## Problem
+
+You always face the same problems when you need to send requests to a RESTful API:
+
+1. How to authenticate?
+2. What headers need to be sent with the request?
+3. Which body properties need to be defined and which ones can be updated?
+
+Every API handles authentication differently and the body configuration for writable endpoints is also different. Usually, the example requests of an API documentation are very simple and the [Fastly API](https://docs.fastly.com/api/) examples are no exception. Mostly you have to send multiple requests to the same endpoint in order to find out how the request needs to be properly configured!
+
+Nowadays a lot of companies provide a [Postman](https://www.getpostman.com/) integration to their users in order to make it easy to get started. Unfortunately, Fastly doesn't provide such thing. Since the [Fastly API](https://docs.fastly.com/api/) provides more features than the application itself you need to use it to take full advantage of their service. [Postman](https://www.getpostman.com/) is a far better replacement of `cURL` and therefore it doesn't make any sense to create a collection of `cURL` commands these days!
+
+## Solution
+
+[Postman](https://www.getpostman.com/) allows you to configure, send, and save HTTP requests. To structure requests, you can define collections and folders. You can also define local and global variables which can be referenced in the URL, headers, and the body. The best part is that you can group local variables in environments. You can then easily switch between environments in order to reference different variables.
+
+This repository contains a [Postman](https://www.getpostman.com/) collection and an environment for the [Fastly API](https://docs.fastly.com/api/). The body of each writeable endpoint has been preconfigured with all possible properties you are able to update and allowed to send. The goal is to make the interaction with the API as easy as possible without running and modifying `cURL` commands in the terminal. You just need to update the global and environment variables to get started. Once setup is complete, you have another powerful tool to manage your [Fastly](https://www.fastly.com/) account and services!
+
 ## Table of Contents
 
-- [Prerequisites](#prerequisites)
-- [Install](#install)
-- [API Coverage](#api-coverage)
+- [Security](#security)
+- [Getting Started](#getting-started)
+- [API](#api)
 - [Usage](#usage)
 - [Tests](#tests)
 - [Contribute](#contribute)
 
-## Prerequisites
+## Security
 
-You'll need [Postman](https://www.getpostman.com/) in order to get started. Postman is a far better replacement of [cURL](https://curl.haxx.se/)! You can either add the [Postman Extension](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en-US) to your [Chrome](https://www.google.com/chrome/browser/desktop/index.html?brand=CHBD&gclid=CIHNlY--r9ICFUaNfgodSrEJFg) web browser or you can download the free [Postman App](https://www.getpostman.com/).
+You need a valid [API token](https://docs.fastly.com/api/auth#tokens) in order to use the [Fastly API](https://docs.fastly.com/api/). I recommend using a token with a [global scope](https://docs.fastly.com/api/auth#access) to be able to perform requests to all endpoints.
 
-## Install
+This client makes it very easy to create and manage your API tokens. You can find in the `Authentication` folder two different endpoint configurations for [POST /tokens](https://docs.fastly.com/api/auth#tokens_db4655a45a0107448eb0676577446e40):
 
-Clone or download this repository and open [Postman](https://www.getpostman.com/). I recommend to clone it by typing the following command in your terminal:
+1. Create a none limited API token (global scope).
+2. Create a limited API token (local scope). The token can be limited by a service, an expiration, and a scope access level.
 
+## Getting Started
+
+These instructions will get you a copy of all the necessary `JSON` configuration files you need to import into [Postman](https://www.getpostman.com/).
+
+### Prerequisites
+
+You need [Postman](https://www.getpostman.com/) in order to get started. You can either add the [Postman Extension](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en-US) to your [Chrome](https://www.google.com/chrome/browser/desktop/index.html?brand=CHBD&gclid=CIHNlY--r9ICFUaNfgodSrEJFg) web browser or you can download the free [Postman Application](https://www.getpostman.com/).
+
+### Downloading
+
+There are several ways you can get the `JSON` configuration files:
+
+#### Cloning The GitHub Repository
+
+The recommended way is to use `git` to directly clone the repository:
+
+```bash
+$ git clone https://github.com/philippschulte/fastly-postman
 ```
-$ git clone https://github.com/philippschulte/fastlyApiCollection.git
+
+This will clone the latest version to a `fastly-postman` folder.
+
+#### Downloading The Repository Zip File
+
+Another way is to download a zip copy from the [master branch on GitHub](https://github.com/philippschulte/fastly-postman/archive/master.zip). You can also do this using the `wget` command:
+
+```bash
+$ wget https://github.com/philippschulte/fastly-postman/archive/master.zip -O fastly-postman.zip; unzip fastly-postman.zip; rm fastly-postman.zip; mv fastly-postman-master fastly-postman
 ```
 
-This way it is easier to fetch the latest changes by typing:
+### Install
 
-```
-$ git pull origin master
-```
-
-By pulling the latest changes from the master branch you can avoid downloading the repository over and over again! Then you need to import the collection, environment, and globals `JSON` file. Click on the [Import](#usage) button on the top bar, and drag and drop:
+Open [Postman](https://www.getpostman.com/) and click on the [Import](#usage) button on the top bar and drag and drop:
 
 ```
 fastly.postman_collection.json
@@ -39,66 +80,22 @@ fastly.postman_environment.json
 fastly.postman_globals.json
 ```
 
-You'll maybe notice an error message like:
+## API
 
-```
-Failed to import data: Could not import: TypeError: Cannot read property 'id' of null
-```
+Below is a list of all the supported libraries of the [Fastly API](https://docs.fastly.com/api/):
 
-Important is that you see the following messages:
-
-- Collection Fastly imported
-- Environment Fastly imported
-- Globals imported
-
-**Don't worry about the error message! I don't know why Postman is throwing this error but I have tested the setup and everything is working like a charm!**
-
-## API Coverage
-
-The following libraries are not part of this collection yet:
-
-- [Remote logging](https://docs.fastly.com/api/logging)
-- [Web Application Firewall](https://docs.fastly.com/api/waf)
-- [Dynamic Servers](https://docs.fastly.com/api/dynamicservers)
-
-Some API endpoints require session authentication. These endpoints are not included even if Postman’s native apps provide a Cookie Manager. Below is a list of all supported libraries of the [Fastly API](https://docs.fastly.com/api/):
-
-| Category         | Collection Requests | API Requests | Coverage |
-| :--------------- | :------------------ | :----------- | :------- |
-| ACL              | 5                   | 5            | 100%     |
-| ACL Entry        | 6                   | 6            | 100%     |
-| API Tokens       | 7                   | 7            | 100%     |
-| Backend          | 5                   | 5            | 100%     |
-| Billing          | 1                   | 1            | 100%     |
-| Billing Address  | 2                   | 4            | 50%      |
-| Cache Settings   | 5                   | 5            | 100%     |
-| Condition        | 5                   | 5            | 100%     |
-| Customer         | 5                   | 5            | 100%     |
-| Dictionary       | 5                   | 5            | 100%     |
-| Dictionary Item  | 7                   | 7            | 100%     |
-| Diff             | 1                   | 1            | 100%     |
-| Director         | 5                   | 5            | 100%     |
-| Director Backend | 3                   | 3            | 100%     |
-| Domain           | 7                   | 7            | 100%     |
-| Event Logs       | 2                   | 2            | 100%     |
-| Gzip             | 5                   | 5            | 100%     |
-| Header           | 5                   | 5            | 100%     |
-| Healthcheck      | 5                   | 5            | 100%     |
-| Historical Stats | 9                   | 9            | 100%     |
-| Invitation       | 3                   | 3            | 100%     |
-| Purging          | 6                   | 6            | 100%     |
-| Request Settings | 5                   | 5            | 100%     |
-| Response Object  | 5                   | 5            | 100%     |
-| Service          | 8                   | 8            | 100%     |
-| Settings         | 2                   | 2            | 100%     |
-| Soft Purging     | 2                   | 2            | 100%     |
-| Stats            | 1                   | 1            | 100%     |
-| User             | 7                   | 7            | 100%     |
-| VCL              | 11                  | 11           | 100%     |
-| VCL Snippets     | 7                   | 7            | 100%     |
-| Version          | 9                   | 9            | 100%     |
-| Utilities        | 6                   | 6            | 100%     |
-|                  | **167**             | **169**      | **99%**  |
+| Category                 	| Coverage 	|
+|--------------------------	|----------	|
+| Authentication           	| 100%     	|
+| Account                  	| 67%      	|
+| Configuration            	| 100%     	|
+| Purging                  	| 100%     	|
+| Historical stats         	| 100%     	|
+| Real-time analytics      	| 0%       	|
+| Remote logging           	| 0%       	|
+| Utilities                	| 100%     	|
+| Web Application Firewall 	| 0%       	|
+| Dynamic Servers          	| 0%       	|
 
 ## Usage
 
@@ -118,7 +115,7 @@ Some API endpoints require session authentication. These endpoints are not inclu
 
 ![Basic Postman Functionality](/screenshots/usage_4.png?raw=true "Basic Postman Functionality")
 
-5. Another great feature of [Postman](https://www.getpostman.com/) is that you can generate code snippets for cURL and most server side languages. All you need to do is to click on the `Generate Code Snippets` link and select your favorite language. **This feature is awesome because your environment variables are replaced with their corresponding values! Technically there are no changes necessary in order to send the requests from you scripts!**
+5. Another great feature of [Postman](https://www.getpostman.com/) is that you can generate code snippets for cURL and most server-side languages. All you need to do is to click on the `Generate Code Snippets` link and select your favorite language. **This feature is awesome because your environment variables are replaced with their corresponding values! Technically there are no changes necessary in order to send the requests from you scripts!**
 
 ![Generate Code Snippets](/screenshots/usage_5.png?raw=true "Generate Code Snippets")
 
@@ -133,7 +130,7 @@ Don't forget that you can always customize this collection and environment to me
 
 ## Tests
 
-With [Postman](https://www.getpostman.com/) you can write and run tests for each request using the JavaScript language. Postman allows you to loop through the data returned by an API and perform sequential requests and tests using that data.
+With [Postman](https://www.getpostman.com/) you can write and run tests for each request using the JavaScript language. [Postman](https://www.getpostman.com/) allows you to loop through the data returned by an API and perform sequential requests and tests using that data.
 
 It contains a powerful runtime based on [Node.js](https://nodejs.org/en/) that allows you to add dynamic behavior to requests and collections. This allows you to write test suites, build requests that can contain dynamic parameters, pass data between requests, and a lot more. You can add JavaScript code to execute during 2 events in the flow:
 
@@ -160,8 +157,12 @@ $ newman run fastly.postman_collection.json -e fastly.postman_environment.json -
 
 ![Postman’s Newman Tool](/screenshots/usage_8.png?raw=true "Postman’s Newman Tool")
 
-**I have added to each request at least one assertion to test the status code. I wanted to keep the collection as simple as possible! Feel free to add as many assertions to the collection as you like and as necessary to meet your needs!**
+**I have added to each request at least one assertion to test the status code. I wanted to keep the collection as simple as possible! Feel free to add as many assertions to the collection as you like!**
 
 ## Contribute
 
 PRs accepted. I am open to suggestions in improving this library.
+
+## License
+
+Licensed under the [MIT License](LICENSE) © 2017 Philipp Schulte
